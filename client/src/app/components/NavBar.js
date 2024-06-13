@@ -2,7 +2,8 @@ import Link from "next/link";
 
 const NavBar = () => {
   return (
-    <nav className="bg-blue-600 p-4 text-white fixed w-full top-0 left-0 border-b border-gray-200">
+    <nav className="bg-blue-600 p-4 text-white w-full left-0 border-b border-gray-200 sticky top-0 z-50">
+      {/* <nav className="bg-blue-600 p-4 text-white fixed w-full top-0 left-0 border-b border-gray-200"> */}
       <div className="container mx-auto flex space-y-3 sm:space-y-0  flex-wrap sm:flex-nowrap sm:flex-row w-full justify-around md:justify-between items-center ">
         <Link href="/">
           <p className="font-bold">Event Management</p>

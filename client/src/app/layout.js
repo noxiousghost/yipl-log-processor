@@ -1,5 +1,3 @@
-// /src/app/layout.js
-
 import NavBar from "./components/NavBar";
 import "./globals.css";
 
@@ -13,7 +11,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="bg-gray-100 text-gray-900">
         <NavBar />
-        <main className="container mx-auto p-4">{children}</main>
+        <main className="relative overflow-y-auto p-4 md:px-10 py-10 h-full text-black">
+          {children}
+        </main>
       </body>
     </html>
   );
