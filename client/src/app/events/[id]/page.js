@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function EventDetail() {
-  // const router = useRouter();
-  // const { id } = router.query;
   const pathname = usePathname();
   const id = pathname.split("/").pop(); // Extracting the ID from the pathname
   const [event, setEvent] = useState(null);
@@ -24,7 +22,16 @@ export default function EventDetail() {
     }
   }, [id]);
 
-  if (!event) return <p>Loading...</p>; // Ensure event is not null before rendering
+  const deleteEvent = async () => {
+    try {
+      await axios.delete(`http://localhost:4000/api/events/${id}`);
+      router.push("/events");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  if (!event) return <p>Loading...</p>;
 
   return (
     <div className="max-w-2xl mx-auto mt-8 bg-white p-4 rounded shadow">
@@ -33,6 +40,12 @@ export default function EventDetail() {
       <p className="mb-2">Start Date: {event.startDate}</p>
       <p className="mb-2">End Date: {event.endDate}</p>
       <p className="mb-2">Total Participants: {event.totalParticipants}</p>
+      <button
+        onClick={deleteEvent}
+        className="bg-red-600 text-white px-4 py-2 rounded"
+      >
+        Delete Event
+      </button>
     </div>
   );
 }
