@@ -1,16 +1,20 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
+// /src/app/layout.js
 
-const inter = Inter({ subsets: ["latin"] });
+import NavBar from "./components/NavBar";
+import "./globals.css";
 
 export const metadata = {
   title: "Event Management App",
+  description: "Manage your events effortlessly",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className="bg-gray-100 text-gray-900">
+        <NavBar />
+        <main className="container mx-auto p-4">{children}</main>
+      </body>
     </html>
   );
 }
