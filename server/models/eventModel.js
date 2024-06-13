@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import path from "path";
 
-const dataFilePath = path.resolve("src", "data", "events.json");
+const dataFilePath = path.resolve("data", "events.json");
 
 fs.ensureFileSync(dataFilePath);
 

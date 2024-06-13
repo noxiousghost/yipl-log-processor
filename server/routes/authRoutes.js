@@ -6,7 +6,7 @@ import path from "path";
 import { v4 as uuidv4 } from "uuid";
 
 const router = express.Router();
-const userFilePath = path.resolve("src", "data", "users.json");
+const userFilePath = path.resolve("data", "users.json");
 
 const readUsers = async () => {
   try {
