@@ -8,9 +8,12 @@ import DataTable, { createTheme } from "react-data-table-component";
 
 export function EventTable() {
   const [search, setSearch] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [events, setEvents] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const router = useRouter();
+
   useEffect(() => {
     axios
       .get("http://localhost:4000/api/events")
@@ -20,19 +23,36 @@ export function EventTable() {
       })
       .catch((error) => console.error(error));
   }, []);
+
   useEffect(() => {
-    const result = events.filter((event) =>
-      event.title.toLowerCase().match(search.toLowerCase())
-    );
+    let result = events;
+
+    if (search) {
+      result = result.filter((event) =>
+        event.title.toLowerCase().match(search.toLowerCase())
+      );
+    }
+
+    if (startDate) {
+      result = result.filter(
+        (event) => new Date(event.startDate) >= new Date(startDate)
+      );
+    }
+
+    if (endDate) {
+      result = result.filter(
+        (event) => new Date(event.endDate) <= new Date(endDate)
+      );
+    }
+
     setFiltered(result);
-  }, [search]);
+  }, [search, startDate, endDate, events]);
 
   createTheme(
     "light",
     {
       text: {
         primary: "black",
-
         secondary: "#2563eb",
       },
       background: {
@@ -88,9 +108,9 @@ export function EventTable() {
       sortable: true,
     },
   ];
+
   return (
     <DataTable
-      // title="Events List"
       columns={columns}
       data={filtered}
       pagination
@@ -101,13 +121,31 @@ export function EventTable() {
       highlightOnHover
       subHeader
       subHeaderComponent={
-        <input
-          type="text"
-          className="block p-2 w-80 text-sm text-gray-900 bg-gray-50 rounded-lg border border-blue-300"
-          placeholder="Search Events"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-2">
+          <input
+            type="text"
+            className="block p-2 w-80 text-sm text-gray-900 bg-gray-50 rounded-lg border border-blue-300"
+            placeholder="Search Events"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          From:
+          <input
+            type="date"
+            className="block p-2 text-sm text-gray-900 bg-gray-50 rounded-lg border border-blue-300"
+            placeholder="Start Date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+          To:
+          <input
+            type="date"
+            className="block p-2 text-sm text-gray-900 bg-gray-50 rounded-lg border border-blue-300"
+            placeholder="End Date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </div>
       }
       subHeaderAlign="left"
       responsive
@@ -121,7 +159,7 @@ export function EventTable() {
 
 export default function Events() {
   return (
-    <div className="max-w-3xl mx-auto mt- p-4 rounded shadow">
+    <div className="max-w-3xl mx-auto mt-4 p-4 rounded shadow">
       <h1 className="text-2xl font-bold mb-4">Events</h1>
       <EventTable />
       <Link href="/events/create">
