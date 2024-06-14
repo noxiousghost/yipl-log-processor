@@ -52,6 +52,9 @@ export default function EventDetail() {
       >
         Delete Event
       </button>
+      <Link href={"/events"}>
+        <p className="text-blue-500">Back to list</p>
+      </Link>
     </div>
   );
 }
