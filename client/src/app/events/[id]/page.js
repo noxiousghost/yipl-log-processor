@@ -1,21 +1,21 @@
 "use client";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import axios from "axios";
 
 export default function EventDetail() {
   const pathname = usePathname();
+  const router = useRouter();
   const id = pathname.split("/").pop(); // Extracting the ID from the pathname
   const [event, setEvent] = useState(null);
 
   useEffect(() => {
     if (id) {
-      console.log(`Fetching event with ID: ${id}`); // Debug log
       axios
         .get(`http://localhost:4000/api/events/${id}`)
         .then((response) => {
-          console.log(`Event data received: ${JSON.stringify(response.data)}`); // Debug log
           setEvent(response.data);
         })
         .catch((error) => console.error(error));
@@ -25,6 +25,7 @@ export default function EventDetail() {
   const deleteEvent = async () => {
     try {
       await axios.delete(`http://localhost:4000/api/events/${id}`);
+      alert("deleted successfully");
       router.push("/events");
     } catch (error) {
       console.error(error);
@@ -39,7 +40,12 @@ export default function EventDetail() {
       <p className="mb-4">{event.description}</p>
       <p className="mb-2">Start Date: {event.startDate}</p>
       <p className="mb-2">End Date: {event.endDate}</p>
-      <p className="mb-2">Total Participants: {event.totalParticipants}</p>
+      <p className="mb-10">Total Participants: {event.totalParticipants}</p>
+      <Link href={`/events/edit/${event.id}`}>
+        <button className="bg-blue-600 text-white px-4 py-2 mr-4 rounded">
+          Edit Event
+        </button>
+      </Link>
       <button
         onClick={deleteEvent}
         className="bg-red-600 text-white px-4 py-2 rounded"
