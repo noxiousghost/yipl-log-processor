@@ -20,7 +20,8 @@ export default function Login() {
         data
       );
       localStorage.setItem("token", response.data.token);
-      router.push("/events");
+      router.push("/");
+      alert("logged in successfully");
     } catch (error) {
       setErrorMessage("Invalid credentials");
       console.error(error);
