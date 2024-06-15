@@ -1,6 +1,6 @@
 # Event Management Application
 
-This is an event management application built using the MERN stack, specifically utilizing Next.js for the client side and Express.js for the backend. The application allows authenticated users to create, read, update, and delete events.
+This is an event management application built using specifically utilizing Next.js for the client side and Express.js for the backend. The application allows authenticated users to create, read, update, and delete events.
 
 ## Features
 
