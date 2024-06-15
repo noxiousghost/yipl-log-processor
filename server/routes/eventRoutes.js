@@ -11,8 +11,8 @@ import { authMiddleware } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.get("/events", getAllEvents);
-router.get("/events/:id", getEventById);
-router.post("/events", createEvent);
-router.put("/events/:id", updateEvent);
-router.delete("/events/:id", deleteEvent);
+router.get("/events/:id", authMiddleware, getEventById);
+router.post("/events", authMiddleware, createEvent);
+router.put("/events/:id", authMiddleware, updateEvent);
+router.delete("/events/:id", authMiddleware, deleteEvent);
 export default router;
