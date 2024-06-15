@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useState } from "react";
+import { useAuth } from "@/utils/AuthContext";
 
 export default function Login() {
   const {
@@ -12,6 +13,7 @@ export default function Login() {
   } = useForm();
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
+  const { login } = useAuth(); // Use the login function from the context
 
   const onSubmit = async (data) => {
     try {
@@ -19,8 +21,9 @@ export default function Login() {
         "http://localhost:4000/auth/login",
         data
       );
-      localStorage.setItem("token", response.data.token);
-      console.log("Token set in localStorage:", response.data.token); // Debugging
+      const token = response.data.token;
+      login(token); // Call the login function to update the context
+      console.log("Token set in localStorage:", token); // Debugging
       router.push("/");
     } catch (error) {
       setErrorMessage("Invalid credentials");
