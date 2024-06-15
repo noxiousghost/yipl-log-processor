@@ -6,18 +6,27 @@ import api from "@/utils/api";
 import { useAuth } from "@/utils/AuthContext";
 
 export default function CreateEvent() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
   const router = useRouter();
-
   const { isLoggedIn } = useAuth();
   if (!isLoggedIn) {
     router.push("/auth/login");
     alert("must login to continue!");
   }
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const validateEndDate = (value) => {
+    const startDateValue = watch("startDate");
+    if (startDateValue && new Date(value) < new Date(startDateValue)) {
+      return "End date should be greater than the start date";
+    }
+
+    return true;
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -71,10 +80,13 @@ export default function CreateEvent() {
           <input
             type="date"
             className="w-full border p-2"
-            {...register("endDate", { required: true })}
+            {...register("endDate", {
+              required: true,
+              validate: validateEndDate,
+            })}
           />
           {errors.endDate && (
-            <span className="text-red-500">End Date is required</span>
+            <span className="text-red-500">{errors.endDate.message}</span>
           )}
         </div>
         <div className="mb-4">
@@ -85,7 +97,12 @@ export default function CreateEvent() {
             {...register("totalParticipants", { required: true })}
           />
           {errors.totalParticipants && (
-            <span className="text-red-500">Total Participants is required</span>
+            <>
+              <span className="text-red-500">{errors.endDate.message}</span>
+              <span className="text-red-500">
+                Total Participants is required
+              </span>
+            </>
           )}
         </div>
         <button
