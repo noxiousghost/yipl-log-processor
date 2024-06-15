@@ -31,7 +31,7 @@ This is an event management application built using specifically utilizing Next.
 1. **Clone the repository:**
 
    ```bash
-   git clone https://narayansapkota-admin@bitbucket.org/narayansapkota/yipl-log-processor.git
+   git clone https://github.com/noxiousghost/yipl-log-processor.git
    cd yipl-log-processor
    ```
 
