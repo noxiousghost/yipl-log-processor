@@ -32,7 +32,7 @@ export default function EventDetail() {
 
   const deleteEvent = async () => {
     try {
-      await axios.delete(`http://localhost:4000/api/events/${id}`);
+      await api.delete(`/events/${id}`);
       alert("deleted successfully");
       router.push("/events");
     } catch (error) {

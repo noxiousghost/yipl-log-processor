@@ -1,13 +1,13 @@
 "use client";
 import { createContext, useContext, useState, useEffect } from "react";
-
+import { useRouter } from "next/navigation";
 // context for authentication
 const AuthContext = createContext();
-
 // Custom hook to use the AuthContext
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
+  const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
 
@@ -53,6 +53,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     setUsername("");
     setIsLoggedIn(false);
+    router.push("/auth/login");
   };
 
   return (

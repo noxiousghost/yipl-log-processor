@@ -16,6 +16,7 @@ const NavBar = () => {
           {isLoggedIn ? (
             <>
               <p className="mx-2">Hello, {username}</p>
+
               <button onClick={logout} className="mx-2 bg-red-600 p-2 rounded">
                 Logout
               </button>
