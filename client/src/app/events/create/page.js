@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import api from "@/utils/api";
+import { useAuth } from "@/utils/AuthContext";
 
 export default function CreateEvent() {
   const {
@@ -11,6 +12,12 @@ export default function CreateEvent() {
     formState: { errors },
   } = useForm();
   const router = useRouter();
+
+  const { isLoggedIn } = useAuth();
+  if (!isLoggedIn) {
+    router.push("/auth/login");
+    alert("must login to continue!");
+  }
 
   const onSubmit = async (data) => {
     try {

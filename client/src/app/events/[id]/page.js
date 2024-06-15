@@ -4,12 +4,20 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import api from "@/utils/api";
+import { useAuth } from "@/utils/AuthContext";
 
 export default function EventDetail() {
   const pathname = usePathname();
   const router = useRouter();
   const id = pathname.split("/").pop(); // Extracting the ID from the pathname
   const [event, setEvent] = useState(null);
+
+  //protecting this route
+  const { isLoggedIn } = useAuth();
+  if (!isLoggedIn) {
+    router.push("/auth/login");
+    alert("must login to continue!");
+  }
 
   useEffect(() => {
     if (id) {

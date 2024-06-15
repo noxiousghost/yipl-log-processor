@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import api from "@/utils/api";
+import { useAuth } from "@/utils/AuthContext";
 
 export default function EditEvent() {
   const pathname = usePathname();
@@ -17,6 +18,11 @@ export default function EditEvent() {
     formState: { errors },
   } = useForm();
   const [event, setEvent] = useState(null);
+  const { isLoggedIn } = useAuth();
+  if (!isLoggedIn) {
+    router.push("/auth/login");
+    alert("must login to continue!");
+  }
 
   useEffect(() => {
     api
