@@ -1,10 +1,10 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import api from "@/utils/api";
 
 export default function EditEvent() {
   const pathname = usePathname();
@@ -19,24 +19,22 @@ export default function EditEvent() {
   const [event, setEvent] = useState(null);
 
   useEffect(() => {
-    if (id) {
-      axios
-        .get(`http://localhost:4000/api/events/${id}`)
-        .then((response) => {
-          setEvent(response.data);
-          setValue("title", response.data.title);
-          setValue("description", response.data.description);
-          setValue("startDate", response.data.startDate);
-          setValue("endDate", response.data.endDate);
-          setValue("totalParticipants", response.data.totalParticipants);
-        })
-        .catch((error) => console.error(error));
-    }
+    api
+      .get(`/events/${id}`)
+      .then((response) => {
+        setEvent(response.data);
+        setValue("title", response.data.title);
+        setValue("description", response.data.description);
+        setValue("startDate", response.data.startDate);
+        setValue("endDate", response.data.endDate);
+        setValue("totalParticipants", response.data.totalParticipants);
+      })
+      .catch((error) => console.error(error));
   }, [id, setValue]);
 
   const onSubmit = async (data) => {
     try {
-      await axios.put(`http://localhost:4000/api/events/${id}`, data);
+      await api.put(`/events/${id}`, data);
       router.push(`/events/${id}`);
     } catch (error) {
       console.error(error);

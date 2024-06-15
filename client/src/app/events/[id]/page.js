@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import axios from "axios";
+import api from "@/utils/api";
 
 export default function EventDetail() {
   const pathname = usePathname();
@@ -13,7 +13,7 @@ export default function EventDetail() {
 
   useEffect(() => {
     if (id) {
-      axios
+      api
         .get(`http://localhost:4000/api/events/${id}`)
         .then((response) => {
           setEvent(response.data);

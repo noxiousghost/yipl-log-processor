@@ -1,8 +1,8 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import api from "@/utils/api";
 
 export default function CreateEvent() {
   const {
@@ -14,7 +14,7 @@ export default function CreateEvent() {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post("http://localhost:4000/api/events", data);
+      await api.post("/events", data);
       router.push("/events");
     } catch (error) {
       console.error(error);

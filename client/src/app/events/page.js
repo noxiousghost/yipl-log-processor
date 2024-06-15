@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import Link from "next/link";
 import DataTable, { createTheme } from "react-data-table-component";
+import api from "@/utils/api";
 
 export function EventTable() {
   const [search, setSearch] = useState("");
@@ -13,10 +13,9 @@ export function EventTable() {
   const [events, setEvents] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const router = useRouter();
-
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/events")
+    api
+      .get("/events")
       .then((response) => {
         setEvents(response.data);
         setFiltered(response.data);
