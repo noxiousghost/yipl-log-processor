@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "id": "1fac2e9b-11b4-41b4-ab1a-259ab6f84b42",
+    "title": "Football",
+    "description": "football",
+    "startDate": "2024-06-15",
+    "endDate": "2024-06-17",
+    "totalParticipants": "12"
+  },
+  {
+    "id": "fd491f35-b75f-4761-bf90-29c0c95bd3df",
+    "title": "kill",
+    "description": "kill",
+    "startDate": "2024-06-17",
+    "endDate": "2024-06-18",
+    "totalParticipants": "3"
+  },
+  {
+    "id": "b6bb37de-a873-4944-92be-70ec7dd07c29",
+    "title": "run",
+    "description": "run",
+    "startDate": "2024-06-20",
+    "endDate": "2024-06-22",
+    "totalParticipants": "25"
+  },
+  {
+    "id": "6432bc79-9653-49ec-98b8-95df121c82ba",
+    "title": "read",
+    "description": "read",
+    "startDate": "2024-07-16",
+    "endDate": "2024-06-13",
+    "totalParticipants": "3"
+  },
+  {
+    "id": "2d9955aa-a94f-4936-a0e9-9229d1c53689",
+    "title": "Namaste",
+    "description": "Namaste Namaste Sabai Lai Namaste",
+    "startDate": "2024-06-20",
+    "endDate": "2024-06-21",
+    "totalParticipants": "3"
+  }
+]
