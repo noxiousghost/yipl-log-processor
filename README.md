@@ -114,7 +114,6 @@ This is an event management application built using the MERN stack, specifically
 - Add unit tests for client and server.
 - Implement user roles and permissions.
 - Migrate from JSON file storage to a database (e.g., MongoDB).
-- Add search and filter functionality for events.
 
 ## Contact
 
