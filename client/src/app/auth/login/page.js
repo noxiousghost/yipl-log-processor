@@ -20,11 +20,11 @@ export default function Login() {
         data
       );
       localStorage.setItem("token", response.data.token);
+      console.log("Token set in localStorage:", response.data.token); // Debugging
       router.push("/");
-      alert("logged in successfully");
     } catch (error) {
       setErrorMessage("Invalid credentials");
-      console.error(error);
+      console.error("Login error:", error);
     }
   };
 
